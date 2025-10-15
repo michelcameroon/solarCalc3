@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Calculate Inverter Size</h1>
+
+<form method="POST">
+    <label>Safety Margin (%):
+        <input type="number" step="1" value="20" name="safety_factor" required>
+    </label><br>
+    <button type="submit">Calculate</button>
+</form>
+
+{% if inverter_size %}
+    <h2>Calculation Results</h2>
+    <p>Total Peak Power Demand: {{ peak_power|round(2) }} W</p>
+    <p>Recommended Inverter Size: {{ inverter_size|round(2) }} W</p>
+    <p>(Including {{ safety_factor }}% safety margin)</p>
+{% endif %}
+
+{% if session.loads %}
+    <h3>Current Loads</h3>
+    <ul>
+    {% for load in session.loads %}
+        <li>
+            {{ load.name }}: {{ load.power }}W
+            (Type: {{ load.get('load_type', 'resistive') | title }})
+        </li>
+    {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}
+
+

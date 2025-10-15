@@ -1,0 +1,97 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Add Electrical Loads</h1>
+
+<table border=1>
+
+<form method="POST">
+ <tr>
+  <th>Name</th>
+  <th>Nr</th>
+  <th>Power</th>
+  <th>Daily Hours</th>
+  <th>Night Hours</th>
+  <tr>
+   <td>
+<input type="text" name="name" required>
+   </td>
+   <td>
+<input type="text" name="devices" required>
+   </td>
+   <td>
+<!--
+<input type="number" step="0.1" name="power" required>
+-->
+<input type="number" name="power" required>
+</td>
+<td>
+<input type="number" step="0.1" name="day_hours" required>
+</td>
+<td>
+<input type="number" step="0.1" name="night_hours" required>
+</td>
+
+   <!--
+    <label>Device Name: <input type="text" name="name" required></label><br>
+    <label>Number Of Devices: <input type="text" name="devices" required></label><br>    
+    <label>Power (Watts): <input type="number" step="0.1" name="power" required></label><br>
+    <label>Daily Hours (Day): <input type="number" step="0.1" name="day_hours" required></label><br>
+    <label>Daily Hours (Night): <input type="number" step="0.1" name="night_hours" required></label><br>
+-->
+
+<!-- In the form 
+
+
+<label>Load Type:
+    <select name="load_type" required>
+        <option value="resistive">Resistive (e.g., lights, TV)</option>
+        <option value="inductive">Inductive (e.g., motor, fridge)</option>
+    </select>
+</label>
+
+-->
+
+
+  <tr>
+   <td>
+    <button type="submit">Add Load</button>
+   </td>
+</form>
+
+</table>
+
+{% if loads %}
+    <h2>Current Loads</h2>
+
+    <ul>
+
+    <table border=1>
+     <tr>
+      <th> Name </th>
+      <th> Nr </th>
+      <th> watts </th>
+      <th> day hr </th>
+      <th> night hr </th>
+     
+    {% for load in loads %}
+      <tr>
+        <td>{{ load.name }}</td>
+        <td> {{ load.devices}}</td>
+        <td>{{ load.power }} </td>
+        <td>{{ load.day_hours }} </td>
+        <td>{{ load.night_hours }}</td>
+
+
+
+        <td> <a href="{{ url_for('delete') }}">delete </a>
+       <!-- <td> <a href="{{ url_for('update') }}">update </a> -->
+      <td>Update</td>
+
+      </tr> 
+    {% endfor %}
+    </table>
+
+{% endif %}
+{% endblock %}

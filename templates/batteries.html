@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Calculate Batteries Needed</h1>
+<p>Total Night Energy Consumption: {{ night_energy|default(0) }} Wh</p>
+
+<form method="POST">
+    <label>Battery Voltage (V): <input type="number" step="1" name="battery_voltage" value=12 /></label>
+
+    <label>Depth of Discharge (DoD, 0-1): <input type="number" step="0.01" name="dod" value=0.5 /></label>
+
+    <label>Battery Capacity (Ah): <input type="number" step="1" name="battery_capacity" value=100 /></label>
+
+    <button type="submit">Calculate</button>
+</form>
+
+{% if result %}
+    <h2>Result</h2>
+    <p>You need <h3><b> {{ result }}</b></h3> with {{ battery_capacity }}Ah 
+{% endif %}
+{% endblock %}
+

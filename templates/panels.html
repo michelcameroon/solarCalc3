@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Calculate Solar Panels Needed</h1>
+<p>Total Daily Energy Consumption: {{ total_energy|default(0) }} Wh</p>
+
+<p>Night Energy Consumption: {{ energy_night|default(0) }} Wh</p>
+
+
+
+<form method="POST">
+    <label>Panel Wattage (W): <input type="number" step="1" name="panel_wattage" value=300 ></label>
+
+    <label>Sun Hours per Day: <input type="number" step="0.1" name="sun_hours" value=4.5></label>
+
+
+    <button type="submit">Calculate</button>
+</form>
+
+{% if result %}
+    <h2>Result</h2>
+    <p> we need <h3 style="color: skyblue">  {{ result }} </h3> with  {{ panel_wattage }}W panels ({{ sun_hours }} sun hours/day)</p>
+
+
+{% endif %}
+{% endblock %}
+
+

@@ -1,0 +1,24 @@
+
+
+<!DOCTYPE html>
+<html> 
+<head> 
+<title>Solar Calculator</title> 
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+</head> 
+<body> 
+<div class="container"> 
+
+<nav> 
+<a href="/">Home</a> | 
+<a href="/add_load">Add Loads</a> | 
+<a href="/calculate_panels">Panels</a> | 
+<a href="/calculate_batteries">Batteries</a> | 
+<a href="/calculate_inverter">Inverter</a> | 
+<a href="/calculate_controller">Controller</a> 
+</nav> 
+{% block content %}{% endblock %} 
+</div> 
+</body> 
+</html> 

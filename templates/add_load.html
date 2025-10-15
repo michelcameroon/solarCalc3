@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Add Electrical Loads</h1> 
+<form method="POST">
+ <table>
+ <tr>
+ <th>Name</th>
+ <th>Nr</th>
+ <th>Power</th>
+ <th>Daily Hours</th>
+ <th>Night Hours</th>
+ <th>Action</th>
+</tr>
+ <tr>
+ <td>
+<input type="text" name="name" require>
+</td>
+ <td>
+<input type="text" name="devices" required>
+</td> 
+<td>
+<input type="number" name="power" required>
+</td> 
+<td>
+<input type="number" step="0.1" name="day_hours" required>
+</td> 
+<td>
+<input type="number" step="0.1" name="night_hours" required>
+</td> 
+<td>
+<button type="submit">Add Load</button>
+</td> 
+</tr>
+ </table> 
+</form>
+
+{% if loads %}
+<h2>Current Loads</h2> 
+<table> 
+<tr> 
+<th>Name</th> 
+<th>Nr</th> 
+<th>Watts</th> 
+<th>Day Hr</th> 
+<th>Night Hr</th> 
+<th>Actions</th> 
+</tr> {% for load in loads %} <tr>
+ <td>{{ load.name }}</td> 
+<td>{{ load.devices }}</td> 
+<td>{{ load.power }}</td> 
+<td>{{ load.day_hours }}</td> 
+<td>{{ load.night_hours }}</td> 
+
+<td> 
+
+<a href="{{ url_for('delete_load', load_index=loop.index0) }}" onclick="return confirm('Are you sure you want to delete this load?')">Delete</a> | 
+<a href="{{ url_for('update_load', load_index=loop.index0) }}">Update</a> 
+</td> 
+</tr>
+ {% endfor %} </table> {% endif %} {% endblock %}
